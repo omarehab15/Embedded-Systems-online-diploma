@@ -7,7 +7,7 @@ SRC =$(wildcard *.c)
 OBJ =$(SRC:.c=.o)
 AS =$(wildcard *.s)
 ASOBJ =$(AS:.s=.o)
-project_name =High_Pressure_Detection_System
+project_name =learn-in-depth-cortexM4
 
 all: $(project_name).hex
 	@echo "======== build is done ========"
@@ -16,7 +16,7 @@ startup.o:startup.s
 %.o: %.c
 	$(CC)gcc.exe -c $(CFLAGS) $(INCS)  $< -o $@
 $(project_name).elf: $(OBJ) $(ASOBJ)
-	$(CC)ld.exe -T linker_script.ld $(LIBS)  $(OBJ) $(ASOBJ) -o $@ 
+	$(CC)ld.exe -T linker_script.ld $(LIBS)  $(OBJ) $(ASOBJ) -o $@ -Map=m_file.map
 $(project_name).hex: $(project_name).elf
 	$(CC)objcopy.exe -O binary $< $@
 clean_all:
